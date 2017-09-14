@@ -5,18 +5,23 @@ using UnityEngine;
 public class LoadMap : MonoBehaviour {
 
 	void Start () {;
-		CreateWall();
+		Vector3 position, scale;
+
+		position = new Vector3(1,5,-20);
+		scale = new Vector3(1,10,20);
+		CreateWall(position, scale);
+
+		position = new Vector3(1,5,-20);
+		scale = new Vector3(20,10,1);
+		CreateWall(position, scale);
 	}
 
 	void Update () {
 
 	}
 
-	void CreateWall() {
-		// future inputs
-		Vector3 position = new Vector3(1,0,-20);
-		Vector3 scale = new Vector3(10,2,40);
-		//Quaternion rotation = Quaternion.Euler(0, 0, 90); // rotate 90 deg around Z-axis
+	void CreateWall(Vector3 position, Vector3 scale) {
+		//Quaternion rotation = Quaternion.Euler(0, 0, 90); // future input, rotate 90 deg around Z-axis
 
 		GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
 		cube.transform.position = position;
