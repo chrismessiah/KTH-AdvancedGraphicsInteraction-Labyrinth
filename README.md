@@ -4,6 +4,8 @@
 
 First install [bfg](https://rtyley.github.io/bfg-repo-cleaner/). If on macOS, you can install it using [homebrew](https://brew.sh/)
 
+**MAKE SURE YOU BACKUP BEFORE MAKING CHANGES**
+
 ```
 $ bfg --delete-files *.mat.meta
 $ bfg --delete-files *.mat
