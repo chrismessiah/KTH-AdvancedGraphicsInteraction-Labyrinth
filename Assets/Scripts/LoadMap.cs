@@ -33,7 +33,6 @@ public class LoadMap : MonoBehaviour {
 			for (int p2 = 0; p2 < length; p2++) {
 				bool isWall = ((int)Mathf.Round(texture.GetPixel(p1, p2).b)) == 0;
 				if (isWall) {
-
 					if (flatMaze) {
 						x = p1 + offsetX;
 						y = 0;
@@ -42,20 +41,11 @@ public class LoadMap : MonoBehaviour {
 						CreateWall (position);
 					} else {
 						x = p1 + offsetX;
-						//y = 0;
-						//z = p2;
-
-						//print (theta);
 						z = r * Mathf.Cos (theta);
 						y = r * Mathf.Sin (theta);
-
-						//Vector3 position = new Vector3(x+offsetX, polarY, polarZ);
 						Vector3 position = new Vector3(x, y, z);
 						CreateWall(position, theta);	
 					}
-					x += 1;
-
-
 				}
 				theta += angleStep;
 			}
@@ -70,14 +60,11 @@ public class LoadMap : MonoBehaviour {
 		cube.transform.localScale = new Vector3(1, 6, 1);
 		return cube;
 	}
-
+		
 	GameObject CreateWall(Vector3 position, float angle) {
-		print(angle);
 		GameObject cube = CreateWall(position);
-
 		//cube.transform.RotateAround (Vector3.zero, Vector3.right, angle);
 		cube.transform.rotation = Quaternion.Euler(angle, 0, 0);
-
 		return cube;
 	}
 
