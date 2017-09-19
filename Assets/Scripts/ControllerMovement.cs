@@ -6,9 +6,9 @@ public class ControllerMovement : MonoBehaviour
 {
     public GameObject world;
     public GameObject playerCamera;
-    private float moveSpeed = 0.03f;
+    private float moveSpeed = 100f;
     private GameObject player;
-    //player is the camerarig
+    private Rigidbody rb;
     SteamVR_Controller.Device device 
     {
         get { return SteamVR_Controller.Input((int)controller.index); }
@@ -25,6 +25,7 @@ public class ControllerMovement : MonoBehaviour
     {
         
         player = transform.parent.parent.gameObject;
+        rb = player.GetComponent<Rigidbody>();
         
 
     }
@@ -48,8 +49,9 @@ public class ControllerMovement : MonoBehaviour
 
             //Read the touchpad values
             touchpad = device.GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
-            Vector3 movement = forwardXZ.normalized * moveSpeed * touchpad.y + rightXZ.normalized * moveSpeed * touchpad.x;
-            player.transform.position += movement;
+            //Vector3 movement = forwardXZ.normalized * moveSpeed * touchpad.y + rightXZ.normalized * moveSpeed * touchpad.x;
+            rb.AddForce(playerCamera.transform.forward * touchpad.y * moveSpeed);
+            rb.AddForce(playerCamera.transform.right * touchpad.x * moveSpeed);
 
             //player.transform.position += transform.right * 0.1f * touchpad.x;
             
