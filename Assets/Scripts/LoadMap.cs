@@ -5,7 +5,7 @@ using UnityEngine;
 public class LoadMap : MonoBehaviour {
 
 	void Start () {;
-		LoadMaze("maze", 300, 100, -295, 0);
+		LoadMaze("maze2", 300, 100, -8, 0);
 	}
 
 	void Update () {
@@ -16,21 +16,50 @@ public class LoadMap : MonoBehaviour {
 	// 	Read/Write: 		Yes
 	// 	Non Power of 2: 	None
 	// Also make sure that the image is placed in the Resources-folder
-	void LoadMaze(string path, int height, int width, int offsetX, int offsetZ) {
+	// Height and width is the dimentions of the image.
+	void LoadMaze(string path, int length, int width, int offsetX, int offsetZ) {
 		
 		Texture2D texture = Resources.Load(path, typeof(Texture2D)) as Texture2D;
 
-		int angle;
-		for (int x = 0; x < height; x++) {
-			angle = 360;
-			for (int z = 0; z < width; z++) {
-				int num = (int)Mathf.Round(texture.GetPixel(z, x).b);
-				if (num == 0) {
-					Vector3 position = new Vector3(x+offsetX, 3, z+offsetZ);
-					CreateWall(position, angle);
+		float theta = 0f;
+		int r = 11;
+		float x = 0f, y = 0f, z = 0f;
+
+		float angleStep = 360 / length; // assumes that the image file is less than 360 pixels in length
+
+		bool flatMaze = false;
+
+		for (int p1 = 0; p1 < width+1; p1++) {
+			for (int p2 = 0; p2 < length; p2++) {
+				bool isWall = ((int)Mathf.Round(texture.GetPixel(p1, p2).b)) == 0;
+				if (isWall) {
+
+					if (flatMaze) {
+						x = p1 + offsetX;
+						y = 0;
+						z = p2;
+						Vector3 position = new Vector3(x, y, z);
+						CreateWall (position);
+					} else {
+						x = p1 + offsetX;
+						//y = 0;
+						//z = p2;
+
+						//print (theta);
+						z = r * Mathf.Cos (theta);
+						y = r * Mathf.Sin (theta);
+
+						//Vector3 position = new Vector3(x+offsetX, polarY, polarZ);
+						Vector3 position = new Vector3(x, y, z);
+						CreateWall(position, theta);	
+					}
+					x += 1;
+
+
 				}
-			angle -= 5;
+				theta += angleStep;
 			}
+			theta = 0f;
 		}
 
 	}
@@ -42,13 +71,17 @@ public class LoadMap : MonoBehaviour {
 		return cube;
 	}
 
-	GameObject CreateWall(Vector3 position, int angle) {
+	GameObject CreateWall(Vector3 position, float angle) {
+		print(angle);
 		GameObject cube = CreateWall(position);
+
+		//cube.transform.RotateAround (Vector3.zero, Vector3.right, angle);
 		cube.transform.rotation = Quaternion.Euler(angle, 0, 0);
+
 		return cube;
 	}
 
-	GameObject CreateWall(Vector3 position, int angle, Vector3 scale) {
+	GameObject CreateWall(Vector3 position, float angle, Vector3 scale) {
 		GameObject cube = CreateWall(position);
 		cube.transform.localScale = scale;
 		cube.transform.rotation = Quaternion.Euler(0, 0, 0);
