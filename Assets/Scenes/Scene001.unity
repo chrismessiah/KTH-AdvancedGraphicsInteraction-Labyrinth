@@ -1060,6 +1060,7 @@ Prefab:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of bb1ab8b... Merge branch 'master' of https://github.com/chrismessiah/Labyrinth
       objectReference: {fileID: 1707141073}
@@ -1084,6 +1085,13 @@ Prefab:
 >>>>>>> parent of ffea6b2... gravity and vr movement
 =======
 >>>>>>> parent of bb1ab8b... Merge branch 'master' of https://github.com/chrismessiah/Labyrinth
+=======
+      objectReference: {fileID: 1696050060}
+    - target: {fileID: 3380982, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 190508551}
+>>>>>>> parent of fb3e21d... update loadmap, add some rotation
     - target: {fileID: 420908, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
@@ -1127,11 +1135,14 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!136 &1097339407
 CapsuleCollider:
 <<<<<<< HEAD
 =======
   m_IsActive: 0
+=======
+>>>>>>> parent of fb3e21d... update loadmap, add some rotation
 --- !u!65 &1097339407
 BoxCollider:
 >>>>>>> fb3e21d8e4076a23b7febd4c93e697ab5b27c0ef
@@ -1535,12 +1546,16 @@ Transform:
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> parent of bb1ab8b... Merge branch 'master' of https://github.com/chrismessiah/Labyrinth
 --- !u!21 &1707141073
 =======
 --- !u!21 &1696050060
 >>>>>>> parent of ffea6b2... gravity and vr movement
+=======
+--- !u!21 &1696050060
+>>>>>>> parent of fb3e21d... update loadmap, add some rotation
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
