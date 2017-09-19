@@ -5,7 +5,7 @@ using UnityEngine;
 public class LoadMap : MonoBehaviour {
 
 	void Start () {;
-		LoadMaze("maze2", 300, 100, -8, 0);
+		LoadMaze("maze2", 300, 100, -50, 0);
 	}
 
 	void Update () {
@@ -22,7 +22,7 @@ public class LoadMap : MonoBehaviour {
 		Texture2D texture = Resources.Load(path, typeof(Texture2D)) as Texture2D;
 
 		float theta = 0f;
-		int r = 11;
+		int r = 97;
 		float x = 0f, y = 0f, z = 0f;
 
 		float angleStep = 360 / length; // assumes that the image file is less than 360 pixels in length
