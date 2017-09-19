@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LoadMap : MonoBehaviour {
-
+	
 	void Start () {;
 		LoadMaze("maze2", 300, 100, -50, 0);
 	}
@@ -21,37 +21,53 @@ public class LoadMap : MonoBehaviour {
 		
 		Texture2D texture = Resources.Load(path, typeof(Texture2D)) as Texture2D;
 
-		float theta = 0f;
-		int r = 97;
-		float x = 0f, y = 0f, z = 0f;
+		const int R = 97;
+		float angleStep = 360 / (float)length; // assumes that the image file is less than 360 pixels in length
 
-		float angleStep = 360 / length; // assumes that the image file is less than 360 pixels in length
+		float x, y, z, theta = 0f;
 
 		bool flatMaze = false;
 
-		for (int p1 = 0; p1 < width+1; p1++) {
+		GameObject wallElement;
+		Vector3 position;
+
+		for (int p1 = 0; p1 < width; p1++) {
+			theta = 0f;
 			for (int p2 = 0; p2 < length; p2++) {
 				bool isWall = ((int)Mathf.Round(texture.GetPixel(p1, p2).b)) == 0;
 				if (isWall) {
+
+					x = p1 + offsetX;
+
 					if (flatMaze) {
-						x = p1 + offsetX;
 						y = 0;
 						z = p2;
-						Vector3 position = new Vector3(x, y, z);
-						CreateWall (position);
 					} else {
-						x = p1 + offsetX;
-						z = r * Mathf.Cos (theta);
-						y = r * Mathf.Sin (theta);
-						Vector3 position = new Vector3(x, y, z);
-						CreateWall(position, theta);	
+						z = R * Mathf.Cos (theta);
+						y = R * Mathf.Sin (theta);
+					}
+
+					position = new Vector3(x, y, z);
+					wallElement = CreateWall(position);
+
+					if (!flatMaze) {
+						RotateWall(wallElement);
 					}
 				}
 				theta += angleStep;
 			}
-			theta = 0f;
 		}
 
+	}
+
+	void RotateWall(GameObject go) {
+		Vector3 origin = new Vector3 (0, 0, 0);
+
+		Vector3 normal = go.transform.position - origin;
+		Vector3 planeNormal = new Vector3 (1, 0, 0);
+
+		normal = Vector3.ProjectOnPlane (normal, planeNormal); // remove any x cord
+		go.transform.rotation = Quaternion.FromToRotation(go.transform.up, normal) * go.transform.rotation;
 	}
 
 	GameObject CreateWall(Vector3 position) {
@@ -60,18 +76,10 @@ public class LoadMap : MonoBehaviour {
 		cube.transform.localScale = new Vector3(1, 6, 1);
 		return cube;
 	}
-		
-	GameObject CreateWall(Vector3 position, float angle) {
-		GameObject cube = CreateWall(position);
-		//cube.transform.RotateAround (Vector3.zero, Vector3.right, angle);
-		cube.transform.rotation = Quaternion.Euler(angle, 0, 0);
-		return cube;
-	}
 
-	GameObject CreateWall(Vector3 position, float angle, Vector3 scale) {
+	GameObject CreateWall(Vector3 position, Vector3 scale) {
 		GameObject cube = CreateWall(position);
 		cube.transform.localScale = scale;
-		cube.transform.rotation = Quaternion.Euler(0, 0, 0);
 		return cube;
 	}
 }
