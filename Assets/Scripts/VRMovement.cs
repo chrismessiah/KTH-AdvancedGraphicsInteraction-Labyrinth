@@ -2,7 +2,7 @@
 using System.Collections;
 using Valve.VR;
 
-public class ControllerMovement : MonoBehaviour
+public class VRMovement : MonoBehaviour
 {
     //public GameObject world;
     public GameObject playerCamera;
@@ -24,11 +24,10 @@ public class ControllerMovement : MonoBehaviour
     Vector2 touchpad;
 
 
-
+    
 
     void Awake(){
-        controller = gameObject.GetComponent<SteamVR_TrackedObject>();
-        
+        controller = gameObject.GetComponent<SteamVR_TrackedObject>();   
     }
 
     void Start()
@@ -57,14 +56,17 @@ public class ControllerMovement : MonoBehaviour
             touchpad = device.GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
 
             //// TEST
+
+            Vector3 localForward = player.transform.InverseTransformDirection(transform.forward);
+            Vector3 localRight = player.transform.InverseTransformDirection(transform.right);
             //Vector3 localForward = transform.rotation * transform.forward;
             //Vector3 localRight = transform.rotation * transform.right;
             //localForward = transform.InverseTransformDirection(transform.forward);
             //localRight = transform.InverseTransformDirection(transform.right);
 
-            //Vector3 bla = new Vector3(localForward.normalized.x * player.transform.forward.x, 0, localForward.normalized.z * player.transform.forward.z);
-            //Vector3 blar = new Vector3(localRight.normalized.x * player.transform.right.x, 0, localRight.normalized.z * player.transform.right.z);
-            // Vector3 movement = bla * moveSpeed * touchpad.y + blar * moveSpeed * touchpad.x;
+            Vector3 bla = new Vector3(localForward.normalized.x * player.transform.forward.x, 0, localForward.normalized.z * player.transform.forward.z);
+            Vector3 blar = new Vector3(localRight.normalized.x * player.transform.right.x, 0, localRight.normalized.z * player.transform.right.z);
+            Vector3 movement = bla * moveSpeed * touchpad.y + blar * moveSpeed * touchpad.x;
             /////
 
 
@@ -75,7 +77,7 @@ public class ControllerMovement : MonoBehaviour
             // Vector3 movement = playerCamera.transform.forward.normalized * moveSpeed * touchpad.y + playerCamera.transform.right.normalized * moveSpeed * touchpad.x;
 
             // CONTROLLER MOVE (TORSO DIRECTION MOVEMENT)
-            Vector3 movement = transform.forward.normalized * moveSpeed * touchpad.y + transform.right.normalized * moveSpeed * touchpad.x;
+            //Vector3 movement = (transform.forward.normalized * moveSpeed * touchpad.y + transform.right.normalized * moveSpeed * touchpad.x);
             rb.AddForce(movement, ForceMode.Acceleration);
 
             // MOVE
