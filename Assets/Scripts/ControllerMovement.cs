@@ -41,24 +41,41 @@ public class ControllerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Doesn't need to update every frame, used for debugging and changing speed during running the game
         moveSpeed = moveManager.moveSpeed;
-        //device = SteamVR_Controller.Input((int)controller.index);
-        //If finger is on touchpad
+
         
+        //If finger is on touchpad
         if (device.GetTouch(SteamVR_Controller.ButtonMask.Touchpad))
         {
 
             // CAMERA DIRECTIONS
-            //Vector3 forwardXZ = new Vector3(playerCamera.transform.forward.x, 0, playerCamera.transform.forward.z);
+            //Vector3 forwardXZ = new Vector3(player.transform.forward
             //Vector3 rightXZ = new Vector3(playerCamera.transform.right.x, 0, playerCamera.transform.right.z);
-
-            // CONTROLLER DIRECTIONS
-            //Vector3 forwardXZ = new Vector3(player.transform.forward.x, 0, player.transform.forward.z);
-            //Vector3 rightXZ = new Vector3(player.transform.right.x, 0, player.transform.right.z);
 
             //Read the touchpad values
             touchpad = device.GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
-            Vector3 movement = playerCamera.transform.forward.normalized * moveSpeed * touchpad.y + playerCamera.transform.right.normalized * moveSpeed * touchpad.x;
+
+            //// TEST
+            //Vector3 localForward = transform.rotation * transform.forward;
+            //Vector3 localRight = transform.rotation * transform.right;
+            //localForward = transform.InverseTransformDirection(transform.forward);
+            //localRight = transform.InverseTransformDirection(transform.right);
+
+            //Vector3 bla = new Vector3(localForward.normalized.x * player.transform.forward.x, 0, localForward.normalized.z * player.transform.forward.z);
+            //Vector3 blar = new Vector3(localRight.normalized.x * player.transform.right.x, 0, localRight.normalized.z * player.transform.right.z);
+            // Vector3 movement = bla * moveSpeed * touchpad.y + blar * moveSpeed * touchpad.x;
+            /////
+
+
+
+
+
+            // CAMERA MOVE (HEAD DIRECTION MOVEMENT)
+            // Vector3 movement = playerCamera.transform.forward.normalized * moveSpeed * touchpad.y + playerCamera.transform.right.normalized * moveSpeed * touchpad.x;
+
+            // CONTROLLER MOVE (TORSO DIRECTION MOVEMENT)
+            Vector3 movement = transform.forward.normalized * moveSpeed * touchpad.y + transform.right.normalized * moveSpeed * touchpad.x;
             rb.AddForce(movement, ForceMode.Acceleration);
 
             // MOVE

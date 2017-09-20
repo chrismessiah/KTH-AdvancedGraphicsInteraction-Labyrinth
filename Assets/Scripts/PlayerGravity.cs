@@ -14,19 +14,18 @@ public class PlayerGravity : MonoBehaviour {
     Vector3 gravityDirection;
 
 
-    // Use this for initialization
     void Start () {
         myNormal = transform.up;
         gravityDirection = gravityCenter - transform.position;
         gravityDirection = new Vector3(0, gravityDirection.y, gravityDirection.z);
     }
 	
-	// Update is called once per frame
+	
 	void Update () {
         gravityDirection = gravityCenter - transform.position;
         gravityDirection = new Vector3(0, gravityDirection.y, gravityDirection.z);
 
-        // Rotate player
+        // Rotate player to align normal towards gravity center
         myNormal = Vector3.Lerp(myNormal, gravityDirection, lerpSpeed);
         Vector3 myForward = Vector3.Cross(transform.right, myNormal);
         Quaternion targetRot = Quaternion.LookRotation(myForward, myNormal);
