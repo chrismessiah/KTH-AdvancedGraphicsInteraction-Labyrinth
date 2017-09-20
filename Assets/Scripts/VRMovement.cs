@@ -64,8 +64,9 @@ public class VRMovement : MonoBehaviour
             //localForward = transform.InverseTransformDirection(transform.forward);
             //localRight = transform.InverseTransformDirection(transform.right);
 
-            Vector3 bla = new Vector3(localForward.normalized.x * player.transform.forward.x, 0, localForward.normalized.z * player.transform.forward.z);
-            Vector3 blar = new Vector3(localRight.normalized.x * player.transform.right.x, 0, localRight.normalized.z * player.transform.right.z);
+            Vector3 bla = new Vector3(localForward.normalized.x * player.transform.forward.x, player.transform.forward.y, localForward.normalized.z * player.transform.forward.z);
+            Vector3 blar = new Vector3(localRight.normalized.x * player.transform.right.x, player.transform.right.y, localRight.normalized.z * player.transform.right.z);
+            //Vector3 movement = player.transform.forward.normalized * localForward.z * moveSpeed * touchpad.y + player.transform.right.normalized * localRight.x * moveSpeed * touchpad.x;
             Vector3 movement = bla * moveSpeed * touchpad.y + blar * moveSpeed * touchpad.x;
             /////
 
@@ -79,6 +80,7 @@ public class VRMovement : MonoBehaviour
             // CONTROLLER MOVE (TORSO DIRECTION MOVEMENT)
             //Vector3 movement = (transform.forward.normalized * moveSpeed * touchpad.y + transform.right.normalized * moveSpeed * touchpad.x);
             rb.AddForce(movement, ForceMode.Acceleration);
+            
 
             // MOVE
             //rb.AddForce(forwardXZ * touchpad.y * moveManager.moveSpeed, ForceMode.Acceleration);
