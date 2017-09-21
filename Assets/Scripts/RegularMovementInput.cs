@@ -29,6 +29,7 @@ public class RegularMovementInput : MonoBehaviour {
 		float horizontalRotation = Input.GetAxis("Mouse X") * mouseSens;
 		transform.Rotate(0,horizontalRotation,0);
 		verticalRotation -= Input.GetAxis("Mouse Y") * mouseSens;
+		verticalRotation = Mathf.Clamp(verticalRotation,-90,90);
 		playerCamera.transform.localRotation = Quaternion.Euler(verticalRotation,0,0);
 	}
 }
