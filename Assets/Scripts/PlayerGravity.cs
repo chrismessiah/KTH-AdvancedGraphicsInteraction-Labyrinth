@@ -8,7 +8,9 @@ public class PlayerGravity : MonoBehaviour {
         get { return GetComponent<Rigidbody>(); }
     }
     private Vector3 gravityCenter = new Vector3(0, 0, 0);
-    public float gravityPower = -50;
+
+    // Gravity needs to be different to account for higher drag and fluent controls
+    public float gravityPower = -100;
     Vector3 myNormal;
     float lerpSpeed = 10f;
     Vector3 gravityDirection;

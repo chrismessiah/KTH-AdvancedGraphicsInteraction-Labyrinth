@@ -6,5 +6,6 @@ using UnityEditor;
 public class MovementManager : MonoBehaviour {
 
     public float moveSpeed;
+    public bool controllerMove;
 
 }

@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GeneralGravity : MonoBehaviour {
-    private Rigidbody rb
-    {
-        get { return GetComponent<Rigidbody>(); }
-    }
+
     private Vector3 gravityCenter = new Vector3(0, 0, 0);
-    private float gravityPower = -10;
+    public float gravityPower = -10;
     Vector3 gravityDirection;
 
 
@@ -24,8 +21,13 @@ public class GeneralGravity : MonoBehaviour {
 
     private void FixedUpdate()
     {
-        gravityDirection = gravityCenter - transform.position;
-        gravityDirection = new Vector3(0, gravityDirection.y, gravityDirection.z);
-        rb.AddForce(gravityDirection.normalized*gravityPower, ForceMode.Acceleration);
+        Component[] rigidBodies = transform.GetComponentsInChildren<Rigidbody>();
+        foreach (Rigidbody rb in rigidBodies)
+        {
+            gravityDirection = gravityCenter - rb.transform.position;
+            gravityDirection = new Vector3(0, gravityDirection.y, gravityDirection.z);
+            rb.AddForce(gravityDirection.normalized * gravityPower, ForceMode.Acceleration);
+        }
+
     }
 }
