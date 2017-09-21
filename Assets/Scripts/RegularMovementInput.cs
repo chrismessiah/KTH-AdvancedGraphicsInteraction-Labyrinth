@@ -8,9 +8,8 @@ public class RegularMovementInput : MonoBehaviour {
 		get { return GetComponent<Rigidbody>();}
 	}
 	public GameObject playerCamera;
-	float turnSpeed = 1f;
 	public float moveSpeed = 300f;
-	float mouseSens = 10f;
+	public float mouseSens = 10f;
 	float verticalRotation = 0;
 
 	// Use this for initialization

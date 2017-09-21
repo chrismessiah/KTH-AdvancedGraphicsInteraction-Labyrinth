@@ -312,7 +312,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.05
-  far clip plane: 1000
+  far clip plane: 3000
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -468,7 +468,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1134775541385154}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cf4f536e99e59b4f9111eccd0d24ab7, type: 3}
+  m_Script: {fileID: 11500000, guid: c20e2a6da1abab446ab5fb221384887b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1708375731477024}
@@ -518,7 +518,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588bdd8c8c60ec240a1c530f9b6f6214, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 200
+  moveSpeed: 300
+  controllerMove: 1
 --- !u!114 &114465680365253462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -655,7 +656,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1066599521606988}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cf4f536e99e59b4f9111eccd0d24ab7, type: 3}
+  m_Script: {fileID: 11500000, guid: c20e2a6da1abab446ab5fb221384887b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1708375731477024}

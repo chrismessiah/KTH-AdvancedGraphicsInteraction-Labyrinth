@@ -29,7 +29,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1085687570913240
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerCamera: {fileID: 1085687570913240}
   moveSpeed: 300
+  mouseSens: 5
 --- !u!124 &124145951820448608
 Behaviour:
   m_ObjectHideFlags: 1
