@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LoadMap : MonoBehaviour {
-	
+	GameObject wallElementTemplate;
+	Texture2D texture;
+
 	void Start () {;
-		LoadMaze("maze3", 360, 100, -50, 0);
+		texture = Resources.Load("maze3", typeof(Texture2D)) as Texture2D;
+		wallElementTemplate = Resources.Load("wall-block-perfect", typeof(GameObject)) as GameObject;
+		//shader = Resources.Load("Standard", typeof(Shader)) as Shader;
+
+		LoadMaze(360, 100, -50, 0);
 	}
 
 	void Update () {
@@ -17,11 +23,9 @@ public class LoadMap : MonoBehaviour {
 	// 	Non Power of 2: 	None
 	// Also make sure that the image is placed in the Resources-folder
 	// Height and width is the dimentions of the image.
-	void LoadMaze(string path, int length, int width, int offsetX, int offsetZ) {
-		
-		Texture2D texture = Resources.Load(path, typeof(Texture2D)) as Texture2D;
+	void LoadMaze(int length, int width, int offsetX, int offsetZ) {
 
-		const int R = 97;
+		const int R = 99;
 		const float angleStep = 360/360; // just to clarify that the input image is expected to be of length 360
 
 		float x, y, z, theta = 0f;
@@ -68,13 +72,18 @@ public class LoadMap : MonoBehaviour {
 
 		normal = Vector3.ProjectOnPlane (normal, planeNormal); // remove any x cord
 		go.transform.rotation = Quaternion.FromToRotation(go.transform.up, normal) * go.transform.rotation;
+		go.transform.Rotate(transform.rotation.x+90,transform.rotation.y,transform.rotation.z+90);
 	}
 
 	GameObject CreateWall(Vector3 position) {
-		GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-		cube.transform.position = position;
-		cube.transform.localScale = new Vector3(1, 6, 1);
-		return cube;
+		GameObject wall = Instantiate(wallElementTemplate) as GameObject;
+		wall.AddComponent<MeshCollider>();
+
+		//GetComponent<MeshRenderer>().material = new Material(shader);
+
+		wall.transform.position = position;
+		wall.transform.localScale = new Vector3(4, 2, 5); // depth, width, height
+		return wall;
 	}
 
 	GameObject CreateWall(Vector3 position, Vector3 scale) {
