@@ -7,7 +7,7 @@ public class LoadMap : MonoBehaviour {
 	Texture2D texture;
 
 	void Start () {;
-		texture = Resources.Load("maze3", typeof(Texture2D)) as Texture2D;
+		texture = Resources.Load("maze99", typeof(Texture2D)) as Texture2D;
 		wallElementTemplate = Resources.Load("wall-block-perfect", typeof(GameObject)) as GameObject;
 		//shader = Resources.Load("Standard", typeof(Shader)) as Shader;
 
@@ -82,7 +82,7 @@ public class LoadMap : MonoBehaviour {
 		//GetComponent<MeshRenderer>().material = new Material(shader);
 
 		wall.transform.position = position;
-		wall.transform.localScale = new Vector3(4, 2, 5); // depth, width, height
+		wall.transform.localScale = new Vector3(2, 0.5f, 2); // depth, width, height
 		return wall;
 	}
 
