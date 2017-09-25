@@ -7,34 +7,44 @@ public class LoadMap : MonoBehaviour {
 	Texture2D mazeMap;
 
 	void Start () {;
-		mazeMap = Resources.Load("maps/debug/maze104", typeof(Texture2D)) as Texture2D;
-		LoadMaze(360, 100, -50, 0);
+		mazeMap = Resources.Load("maps/maze99", typeof(Texture2D)) as Texture2D;
+
+		/* Input parameters
+		 * 	  1st - map length in pixels, must be less or equal to 360
+		 * 	  2nd - map width in pixels, must be less or equal to 100
+		 */
+		LoadMaze(220, 40, -50, 0);
 	}
 
-	// make sure the image settings under Advanced are
-	// 	Read/Write: 		Yes
-	// 	Non Power of 2: 	None
-	// Also make sure that the image is placed in the Resources-folder
-	// Height and width is the dimentions of the image.
+	/* 
+	 * Make sure the image settings under Advanced are
+	 * 	  Read/Write: 		Yes
+	 * 	  Non Power of 2: 	None
+	 * 
+	 * Also make sure that the image is placed in the Resources-folder
+	 * Height and width is the dimentions of the image.
+	 */
 	void LoadMaze(int length, int width, int offsetX, int offsetZ) {
 
 		const int R = 99;
-		const float angleStep = 1.0f; // just to clarify that the input image is expected to be of length 360
-
+		float angleStep = 360f/length; // just to clarify that the input image is expected to be of length 360
+		float wallElementDepth = angleStep;
+		float wallElementWidth = 100f/width; // divide cylinder thickness with map pixel width;
+		
 		float x, y, z, theta = 0f, thetaRadians;
 
 		bool flatMaze = false;
 
 		GameObject wallElement;
 		Vector3 position;
-		Vector3 scale = new Vector3 (2.5f, 1, 2); // depth, width, height
+		Vector3 scale = new Vector3 (wallElementDepth*2.5f, wallElementWidth, 2); // depth, width, height
 
 		for (int p1 = 0; p1 < length; p1++) { // loop over long edge
 			for (int p2 = 0; p2 < width; p2++) { // loop over short edge
 				bool isWall = ((int)Mathf.Round(mazeMap.GetPixel(p2, p1).b)) == 0;
 				if (isWall) {
 
-					x = p2 + offsetX;
+					x = p2*wallElementWidth + offsetX;
 
 					if (flatMaze) {
 						y = 0;
