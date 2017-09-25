@@ -97,7 +97,7 @@ public class MazeGenerator : MonoBehaviour{
 				labyrinth_map.SetPixel (x, height - 1, Color.black);
 		}
 			
-		string path = Application.dataPath + "/Resources/generated_maze.png";
+		string path = Application.dataPath + "/Resources/maps/generated_maze.png";
 		Debug.Log ("Saving maze to: " + path);
 		System.IO.File.WriteAllBytes (path, labyrinth_map.EncodeToPNG ());
 	}
