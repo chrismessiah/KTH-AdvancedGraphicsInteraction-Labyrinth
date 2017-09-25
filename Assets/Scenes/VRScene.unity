@@ -1277,6 +1277,22 @@ Transform:
   m_PrefabParentObject: {fileID: 4950875517029210, guid: 2ab4b1cf49e9b4f7ebed93231cbdbe4b,
     type: 2}
   m_PrefabInternal: {fileID: 1914828155}
+--- !u!1 &914098253 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1559786283071976, guid: 2ab4b1cf49e9b4f7ebed93231cbdbe4b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1914828155}
+--- !u!122 &914098257
+Halo:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 914098253}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294950277
+  m_Size: 326
 --- !u!4 &918338591 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4469330520985286, guid: 2c6d2f074a44ab049b406a61920cca4c,
