@@ -814,6 +814,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ba92e895e404338a2f8090e8f86676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wallElementTemplate: {fileID: 1028495974958194, guid: 23e492ead89a0466982b4ca39021d7a0,
+    type: 2}
 --- !u!1 &890367283
 GameObject:
   m_ObjectHideFlags: 0
