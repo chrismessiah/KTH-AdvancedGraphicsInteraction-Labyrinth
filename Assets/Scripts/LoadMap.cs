@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LoadMap : MonoBehaviour {
-	GameObject wallElementTemplate;
+	public GameObject wallElementTemplate;
 	Texture2D texture;
 
 	void Start () {;
 		texture = Resources.Load("maps/maze99", typeof(Texture2D)) as Texture2D;
-		wallElementTemplate = Resources.Load("wall-block-perfect", typeof(GameObject)) as GameObject;
+		//wallElementTemplate = Resources.Load("wallblockprefab", typeof(GameObject)) as GameObject;
 		//shader = Resources.Load("Standard", typeof(Shader)) as Shader;
 
 		LoadMaze(360, 100, -50, 0);
@@ -79,7 +79,6 @@ public class LoadMap : MonoBehaviour {
 
 	GameObject CreateWall(Vector3 position) {
 		GameObject wall = Instantiate(wallElementTemplate) as GameObject;
-		wall.AddComponent<MeshCollider>();
 		//GetComponent<MeshRenderer>().material = new Material(shader);
 		wall.transform.position = position;
 		wall.transform.localScale = new Vector3(1, 1, 2);
