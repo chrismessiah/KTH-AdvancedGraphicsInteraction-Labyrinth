@@ -4,18 +4,11 @@ using UnityEngine;
 
 public class LoadMap : MonoBehaviour {
 	public GameObject wallElementTemplate;
-	Texture2D texture;
+	Texture2D mazeMap;
 
 	void Start () {;
-		texture = Resources.Load("maps/debug/maze104", typeof(Texture2D)) as Texture2D;
-		//wallElementTemplate = Resources.Load("wallblockprefab", typeof(GameObject)) as GameObject;
-		//shader = Resources.Load("Standard", typeof(Shader)) as Shader;
-
+		mazeMap = Resources.Load("maps/debug/maze104", typeof(Texture2D)) as Texture2D;
 		LoadMaze(360, 100, -50, 0);
-	}
-
-	void Update () {
-
 	}
 
 	// make sure the image settings under Advanced are
@@ -36,13 +29,12 @@ public class LoadMap : MonoBehaviour {
 		Vector3 position;
 		Vector3 scale = new Vector3 (2.5f, 1, 2); // depth, width, height
 
-		for (int p1 = 0; p1 < width; p1++) { // loop over short edge
-			theta = 0f;
-			for (int p2 = 0; p2 < length; p2++) { // loop over long edge
-				bool isWall = ((int)Mathf.Round(texture.GetPixel(p1, p2).b)) == 0;
+		for (int p1 = 0; p1 < length; p1++) { // loop over long edge
+			for (int p2 = 0; p2 < width; p2++) { // loop over short edge
+				bool isWall = ((int)Mathf.Round(mazeMap.GetPixel(p2, p1).b)) == 0;
 				if (isWall) {
 
-					x = p1 + offsetX;
+					x = p2 + offsetX;
 
 					if (flatMaze) {
 						y = 0;
@@ -60,8 +52,8 @@ public class LoadMap : MonoBehaviour {
 						RotateWall(wallElement);
 					}
 				}
-				theta += angleStep;
 			}
+			theta += angleStep;
 		}
 
 	}
