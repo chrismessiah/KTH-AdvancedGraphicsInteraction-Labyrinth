@@ -7,7 +7,7 @@ public class LoadMap : MonoBehaviour {
 	Texture2D mazeMap;
 
 	void Start () {;
-		mazeMap = Resources.Load("maps/maze99", typeof(Texture2D)) as Texture2D;
+		mazeMap = Resources.Load("maps/generated_maze", typeof(Texture2D)) as Texture2D;
 
 		/* Input parameters
 		 * 	  1st - map length in pixels, must be less or equal to 360

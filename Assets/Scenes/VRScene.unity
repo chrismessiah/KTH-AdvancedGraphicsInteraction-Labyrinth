@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1129675878}
-  m_IndirectSpecularColor: {r: 0.0030897825, g: 0.0028942472, b: 0.0031967217, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -1179,7 +1179,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &784456461
 Transform:
   m_ObjectHideFlags: 0
@@ -1277,6 +1277,22 @@ Transform:
   m_PrefabParentObject: {fileID: 4950875517029210, guid: 2ab4b1cf49e9b4f7ebed93231cbdbe4b,
     type: 2}
   m_PrefabInternal: {fileID: 1914828155}
+--- !u!1 &914098253 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1559786283071976, guid: 2ab4b1cf49e9b4f7ebed93231cbdbe4b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1914828155}
+--- !u!122 &914098257
+Halo:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 914098253}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294950277
+  m_Size: 326
 --- !u!4 &918338591 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4469330520985286, guid: 2c6d2f074a44ab049b406a61920cca4c,
