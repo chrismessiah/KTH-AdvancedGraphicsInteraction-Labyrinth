@@ -13,29 +13,30 @@ public class MazeGenerator : MonoBehaviour{
 
 	public void generate_maze(){
 
-		if (width % 2 == 0)
-			node_width = (width / 2) - 1;
-		else
-			node_width = (width - 1) / 2;
-		
-		if (height % 2 == 0)
-			node_height = (height / 2) - 1;
-		else
-			node_height = (height - 1) / 2;
-
 		Texture2D labyrinth_map;
 		MazeNode[,] maze;
 
 		// Check conditions
-		if (width < 0) {
+		if (width <= 0) {
 			Debug.Log ("width need to be larger than 0");
 			return;
 		}
-		if (height < 0) {
+		if (height <= 0) {
 			Debug.Log ("height need to be larger than 0");
 			return;
 		}
 
+		// Node Size
+		if (width % 2 == 0)
+			node_width = (width / 2) - 1;
+		else
+			node_width = (width - 1) / 2;
+
+		if (height % 2 == 0)
+			node_height = (height / 2) - 1;
+		else
+			node_height = (height - 1) / 2;
+		
 		// Setup Maze
 		maze = new MazeNode[node_width, node_height];
 
