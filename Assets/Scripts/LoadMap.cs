@@ -3,50 +3,83 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LoadMap : MonoBehaviour {
+	public GameObject wallElementTemplate;
+	Texture2D mazeMap;
 
 	void Start () {;
-		LoadMaze("maze", 300, 100, 0, -300);
-	}
-
-	void Update () {
-
+		mazeMap = Resources.Load("maps/debug/maze104", typeof(Texture2D)) as Texture2D;
+		LoadMaze(360, 100, -50, 0);
 	}
 
 	// make sure the image settings under Advanced are
 	// 	Read/Write: 		Yes
 	// 	Non Power of 2: 	None
 	// Also make sure that the image is placed in the Resources-folder
-	void LoadMaze(string path, int height, int width, int offsetX, int offsetZ) {
-		Texture2D texture = Resources.Load(path, typeof(Texture2D)) as Texture2D;
-		for (int x = 0; x < width; x++) {
-			for (int z = 0; z < height; z++) {
-				int num = (int)Mathf.Round(texture.GetPixel(x, z).b);
-				if (num == 0) {
-					Vector3 position = new Vector3(x+offsetX, 3, z+offsetZ);
-					CreateWall(position);
+	// Height and width is the dimentions of the image.
+	void LoadMaze(int length, int width, int offsetX, int offsetZ) {
+
+		const int R = 99;
+		const float angleStep = 1.0f; // just to clarify that the input image is expected to be of length 360
+
+		float x, y, z, theta = 0f, thetaRadians;
+
+		bool flatMaze = false;
+
+		GameObject wallElement;
+		Vector3 position;
+		Vector3 scale = new Vector3 (2.5f, 1, 2); // depth, width, height
+
+		for (int p1 = 0; p1 < length; p1++) { // loop over long edge
+			for (int p2 = 0; p2 < width; p2++) { // loop over short edge
+				bool isWall = ((int)Mathf.Round(mazeMap.GetPixel(p2, p1).b)) == 0;
+				if (isWall) {
+
+					x = p2 + offsetX;
+
+					if (flatMaze) {
+						y = 0;
+						z = p2;
+					} else {
+						thetaRadians = Mathf.Deg2Rad * theta;
+						z = R * Mathf.Cos (thetaRadians);
+						y = R * Mathf.Sin (thetaRadians);
+					}
+
+					position = new Vector3(x, y, z);
+					wallElement = CreateWall(position, scale);
+
+					if (!flatMaze) {
+						RotateWall(wallElement);
+					}
 				}
 			}
+			theta += angleStep;
 		}
 
 	}
 
+	void RotateWall(GameObject go) {
+		Vector3 origin = new Vector3 (0, 0, 0);
+
+		Vector3 normal = go.transform.position - origin;
+		Vector3 planeNormal = new Vector3 (1, 0, 0);
+
+		normal = Vector3.ProjectOnPlane (normal, planeNormal); // remove any x cord
+		go.transform.rotation = Quaternion.FromToRotation(go.transform.up, normal) * go.transform.rotation;
+		go.transform.Rotate(transform.rotation.x+90,transform.rotation.y,transform.rotation.z+90);
+	}
+
 	GameObject CreateWall(Vector3 position) {
-		GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-		cube.transform.position = position;
-		cube.transform.localScale = new Vector3(1, 6, 1);
-		return cube;
+		GameObject wall = Instantiate(wallElementTemplate) as GameObject;
+		//GetComponent<MeshRenderer>().material = new Material(shader);
+		wall.transform.position = position;
+		wall.transform.localScale = new Vector3(1, 1, 2);
+		return wall;
 	}
 
 	GameObject CreateWall(Vector3 position, Vector3 scale) {
-		GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-		cube.transform.position = position;
+		GameObject cube = CreateWall(position);
 		cube.transform.localScale = scale;
-		return cube;
-	}
-
-	GameObject CreateWall(Vector3 position, Vector3 scale, Quaternion rotation) {
-		GameObject cube = CreateWall(position, scale);
-		cube.transform.rotation = rotation;
 		return cube;
 	}
 }
