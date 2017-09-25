@@ -7,6 +7,7 @@ public class MazeGenerator : MonoBehaviour{
 	
 	public int width;
 	public int height;
+	public bool wrap;
 
 	private int node_width;
 	private int node_height;
@@ -17,12 +18,12 @@ public class MazeGenerator : MonoBehaviour{
 		MazeNode[,] maze;
 
 		// Check conditions
-		if (width <= 0) {
-			Debug.Log ("width need to be larger than 0");
+		if (width < 3) {
+			Debug.Log ("width need to be larger than 3");
 			return;
 		}
-		if (height <= 0) {
-			Debug.Log ("height need to be larger than 0");
+		if (height < 3) {
+			Debug.Log ("height need to be larger than 3");
 			return;
 		}
 
@@ -32,10 +33,19 @@ public class MazeGenerator : MonoBehaviour{
 		else
 			node_width = (width - 1) / 2;
 
-		if (height % 2 == 0)
-			node_height = (height / 2) - 1;
-		else
-			node_height = (height - 1) / 2;
+		if (height % 2 == 0) {
+			if (wrap) {
+				node_height = (height / 2);
+			} else {
+				node_height = (height / 2) - 1;
+			}
+		} else {
+			if (wrap) {
+				node_height = (height + 1) / 2;
+			} else {
+				node_height = (height - 1) / 2;
+			}
+		}
 		
 		// Setup Maze
 		maze = new MazeNode[node_width, node_height];
@@ -53,8 +63,15 @@ public class MazeGenerator : MonoBehaviour{
 		// Fill texture with result
 		labyrinth_map = new Texture2D(width, height);
 
+		int height_iter;
+		if (wrap) {
+			height_iter = height;
+		} else {
+			height_iter = height - 1;
+		}
+
 		//Debug.Log("Filling up texture");
-		for (int y = 0; y < height-1; y++) {
+		for (int y = 0; y < height_iter; y++) {
 			for (int x = 0; x < width-1; x++) {
 				if ((x % 2 != 0) & (y % 2 != 0)) {
 					int node_x = (x - 1) / 2;
@@ -75,11 +92,13 @@ public class MazeGenerator : MonoBehaviour{
 					// Corners
 					labyrinth_map.SetPixel( x-1, y-1, Color.black);
 					labyrinth_map.SetPixel( x+1, y-1, Color.black);
-					labyrinth_map.SetPixel( x-1, y+1, Color.black);
-					labyrinth_map.SetPixel( x+1, y+1, Color.black);
+					if (y + 1 < height) {
+						labyrinth_map.SetPixel (x - 1, y + 1, Color.black);
+						labyrinth_map.SetPixel (x + 1, y + 1, Color.black);
 
-					// Walls
-					labyrinth_map.SetPixel (x, 		y + 1, 	walls[0]);
+						// Walls
+						labyrinth_map.SetPixel (x, y + 1, walls [0]);
+					}
 					labyrinth_map.SetPixel (x - 1, 	y,	 	walls[1]);
 					labyrinth_map.SetPixel (x, 		y - 1, 	walls[2]);
 					labyrinth_map.SetPixel (x + 1, 	y,	 	walls[3]);
@@ -95,6 +114,14 @@ public class MazeGenerator : MonoBehaviour{
 		if(labyrinth_map.GetPixel(0, height-1) != Color.black){
 			for (int x = 0; x < width; x++)
 				labyrinth_map.SetPixel (x, height - 1, Color.black);
+		}
+		// Make the labyrinth wrap at the short edges
+		if (wrap) {
+			int connections = width / 8;
+			for (int x = 0; x < connections; x++) {
+				int index = Random.Range (0, node_width) * 2 + 1;
+				labyrinth_map.SetPixel (index, 0, Color.white);
+			}
 		}
 			
 		string path = Application.dataPath + "/Resources/generated_maze.png";
