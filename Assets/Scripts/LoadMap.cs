@@ -7,7 +7,7 @@ public class LoadMap : MonoBehaviour {
 	Texture2D texture;
 
 	void Start () {;
-		texture = Resources.Load("maps/maze99", typeof(Texture2D)) as Texture2D;
+		texture = Resources.Load("maps/debug/maze104", typeof(Texture2D)) as Texture2D;
 		//wallElementTemplate = Resources.Load("wallblockprefab", typeof(GameObject)) as GameObject;
 		//shader = Resources.Load("Standard", typeof(Shader)) as Shader;
 
