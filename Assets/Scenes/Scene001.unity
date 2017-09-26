@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12153588, g: 0.07066482, b: 0.09537004, a: 1}
+  m_IndirectSpecularColor: {r: 0.031600647, g: 0.009900725, b: 0.013385631, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -477,6 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e60eaf43f67b4e47aa79c12ebb23485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
 --- !u!1 &272271448 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 159396, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
@@ -604,6 +605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e60eaf43f67b4e47aa79c12ebb23485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
 --- !u!1 &471565172
 GameObject:
   m_ObjectHideFlags: 0
@@ -698,6 +700,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e60eaf43f67b4e47aa79c12ebb23485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
 --- !u!1 &653960142 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: aab9b081794174c57a93d1383168ed72, type: 3}
@@ -814,7 +817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ba92e895e404338a2f8090e8f86676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallElementTemplate: {fileID: 1028495974958194, guid: 23e492ead89a0466982b4ca39021d7a0,
+  wallElementTemplate: {fileID: 1754445653195206, guid: 0babc9fe9a0624ba0ba7166f74cf0ff8,
     type: 2}
 --- !u!1 &890367283
 GameObject:
@@ -911,6 +914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e60eaf43f67b4e47aa79c12ebb23485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
 --- !u!4 &943179033 stripped
 Transform:
   m_PrefabParentObject: {fileID: 420908, guid: 4d293c8e162f3874b982baadd71153d2, type: 2}
@@ -1117,14 +1121,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e9dd854ed7829b4997dc19fa2508ab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 6
-  turnSpeed: 90
-  lerpSpeed: 10
-  gravity: 10
-  isGrounded: 0
-  deltaGround: 0.2
-  jumpSpeed: 10
-  jumpRange: 10
 --- !u!4 &1097339410
 Transform:
   m_ObjectHideFlags: 0
@@ -1252,6 +1248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 40
   height: 220
+  wrap: 0
 --- !u!4 &1322763213
 Transform:
   m_ObjectHideFlags: 0
@@ -1505,6 +1502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e60eaf43f67b4e47aa79c12ebb23485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
 --- !u!1 &1663169769
 GameObject:
   m_ObjectHideFlags: 0
@@ -1599,6 +1597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e60eaf43f67b4e47aa79c12ebb23485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
 --- !u!1 &1669296266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1799,6 +1798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e60eaf43f67b4e47aa79c12ebb23485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
 --- !u!1 &2087735556 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100000, guid: 96cc53bf72e1e43909c4ec4c288e2fe3, type: 3}
@@ -1818,3 +1818,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e60eaf43f67b4e47aa79c12ebb23485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
