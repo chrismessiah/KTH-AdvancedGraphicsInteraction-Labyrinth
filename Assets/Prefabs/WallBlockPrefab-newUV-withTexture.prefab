@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4770452994698520}
   - component: {fileID: 33496472829798032}
   - component: {fileID: 23507935226779678}
-  - component: {fileID: 95738888505536278}
   - component: {fileID: 65465634559687272}
   m_Layer: 0
   m_Name: WallBlockPrefab-newUV-withTexture
@@ -96,20 +95,3 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.785196, y: 1.0000002, z: 1.0069163}
   m_Center: {x: 0.000000001862645, y: -0.00000001490116, z: 0}
---- !u!95 &95738888505536278
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1754445653195206}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 960bf78c9e02f4227b4afe2fe105552c, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1

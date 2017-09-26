@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff26db721962cdf4a8edcdfa9a767d2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  profile: {fileID: 11400000, guid: 86de90643f654422da787f070ef16e95, type: 2}
+  profile: {fileID: 11400000, guid: e5e368be30a8840b88bdca091f9d3bd1, type: 2}
 --- !u!4 &61236121 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4131100343046954, guid: 1f119df703d0949958571706b752ae33,
@@ -284,7 +284,7 @@ Light:
   m_Type: 2
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2
-  m_Range: 116.03
+  m_Range: 131.31
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -302,7 +302,7 @@ Light:
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Lightmapping: 2
+  m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
@@ -1219,7 +1219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9ba92e895e404338a2f8090e8f86676, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallElementTemplate: {fileID: 1028495974958194, guid: 23e492ead89a0466982b4ca39021d7a0,
+  wallElementTemplate: {fileID: 1754445653195206, guid: 0babc9fe9a0624ba0ba7166f74cf0ff8,
     type: 2}
 --- !u!54 &784456467
 Rigidbody:
@@ -2762,7 +2762,7 @@ Prefab:
     - target: {fileID: 114446100296311984, guid: 2ab4b1cf49e9b4f7ebed93231cbdbe4b,
         type: 2}
       propertyPath: speed
-      value: 10
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2ab4b1cf49e9b4f7ebed93231cbdbe4b, type: 2}
