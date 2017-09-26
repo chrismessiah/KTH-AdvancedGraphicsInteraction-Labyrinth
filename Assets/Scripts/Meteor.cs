@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Meteor : MonoBehaviour {
-	public float minSpeed = 5.0f;
-	public float turnSpeed = 20.0f;
-	public float randomFreq = 10.0f;
-	public float randomForce = 10.0f;
+	public float minSpeed = 10.0f;
+	public float turnSpeed = 250.0f;
+	public float randomFreq = 30.0f;
+	public float randomForce = 80.0f;
 
-	public float alignForce = 50.0f;
-	public float alignRange = 100.0f;
+	public float alignForce = 20.0f;
+	public float alignRange = 200.0f;
 
-	public float avoidanceRadius = 20.0f;
-	public float avoidanceForce = 20.0f;
+	public float avoidanceRadius = 130.0f;
+	public float avoidanceForce = 60.0f;
 
 	public float gatherVelocity = 5.0f;
-	public float gatherRadius = 30.0f;
+	public float gatherRadius = 200.0f;
 
 	private Vector3 velocity;
 	private Vector3 randomPush;
@@ -119,7 +119,6 @@ public class Meteor : MonoBehaviour {
 
 		velocity = Vector3.RotateTowards(velocity, wantedVel, turnSpeed * Time.deltaTime, 100.00f);
 		transform.rotation = Quaternion.LookRotation(velocity);
-
 		transform.Translate(velocity * Time.deltaTime, Space.World);
 	}
 }

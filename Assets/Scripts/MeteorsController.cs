@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MeteorsController : MonoBehaviour {
 	public Vector3 bound;
-	public float speed = 5.0f;
+	public float speed = 10.0f;
 
 	public Meteor[] Flocks;
 	public int FlockCount;
@@ -27,7 +27,7 @@ public class MeteorsController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		transform.Translate(Vector3.forward * speed * Time.deltaTime);
-		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(nextMovementPoint - transform.position), 0.1f * Time.deltaTime);
+		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(nextMovementPoint - transform.position), 0.2f * Time.deltaTime);
 
 		if (Vector3.Distance(nextMovementPoint, transform.position) <= 10.0f)
 			CalculateNextMovementPoint();
@@ -35,7 +35,7 @@ public class MeteorsController : MonoBehaviour {
 
 	private void CalculateNextMovementPoint()
 	{
-		float posX = Random.Range(-15, -5);
+		float posX = Random.Range(-15, -15);
 		float posY = Random.Range(initialPosition.y - bound.y, initialPosition.y + bound.y);
 		float posZ = Random.Range(initialPosition.z - bound.z, initialPosition.z + bound.z);
 
