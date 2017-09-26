@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1129675878}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.0030897825, g: 0.0028942472, b: 0.0031967217, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -145,7 +145,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8f59b0b9310c8c3459ddf020b60a9b24, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 8f59b0b9310c8c3459ddf020b60a9b24, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -653,6 +653,7 @@ Transform:
   - {fileID: 2033149371}
   - {fileID: 1601968101}
   - {fileID: 284066835}
+  - {fileID: 2112553406}
   m_Father: {fileID: 1325539907}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1573,7 +1574,7 @@ Transform:
   - {fileID: 246348396}
   - {fileID: 562251804}
   m_Father: {fileID: 1325539907}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1012644284
 GameObject:
@@ -1940,7 +1941,6 @@ Transform:
   - {fileID: 1247526948}
   - {fileID: 2087735560}
   - {fileID: 1129675879}
-  - {fileID: 2112553406}
   - {fileID: 950680751}
   - {fileID: 40679279}
   m_Father: {fileID: 1669296267}
@@ -2970,7 +2970,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 4294967294
   m_IsActive: 1
 --- !u!4 &2112553406
 Transform:
@@ -2978,12 +2978,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2112553405}
-  m_LocalRotation: {x: -0, y: 0.978747, z: -0, w: -0.2050715}
-  m_LocalPosition: {x: -634, y: 141, z: 911}
-  m_LocalScale: {x: 300.00055, y: 300, z: 300.00055}
+  m_LocalRotation: {x: -0, y: 0.54451424, z: -0, w: -0.8387517}
+  m_LocalPosition: {x: 4.521313, y: 0.086666666, z: 2.9324586}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
-  m_Father: {fileID: 1325539907}
-  m_RootOrder: 4
+  m_Father: {fileID: 307357513}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2112553407
 MonoBehaviour:
@@ -3034,4 +3034,4 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2112553405}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 4300000, guid: ebff77b32766a4be595f025cdc11de65, type: 3}
