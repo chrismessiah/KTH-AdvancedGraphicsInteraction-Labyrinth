@@ -6,39 +6,14 @@ public class LoadMap : MonoBehaviour {
 	public GameObject wallElementTemplate;
 	Texture2D mazeMap;
 
-	void Awake () {;
-		string path = "maps/maze-chris";
-		//string path = "maps/generated_maze";
-
-		mazeMap = Resources.Load(path, typeof(Texture2D)) as Texture2D;
+	void Start () {;
+		mazeMap = Resources.Load("maps/generated_maze", typeof(Texture2D)) as Texture2D;
 
 		/* Input parameters
 		 * 	  1st - map length in pixels, must be less or equal to 360
 		 * 	  2nd - map width in pixels, must be less or equal to 100
 		 */
 		LoadMaze(220, 40, -50, 0);
-	}
-
-	// walls are black in the images
-	bool isWall(Color color) {
-		int blue = ((int)Mathf.Round(color.b));
-		int red = ((int)Mathf.Round(color.r));
-		int green = ((int)Mathf.Round(color.g));
-		if (blue == 0 && red == 0 && green == 0) {
-			return true;
-		}
-		return false;
-	}
-
-	// player is blue in the image
-	bool isPlayer(Color color) {
-		int blue = ((int)Mathf.Round(color.b));
-		int red = ((int)Mathf.Round(color.r));
-		int green = ((int)Mathf.Round(color.g));
-		if (blue == 1 && red == 0 && green == 0) {
-			return true;
-		}
-		return false;
 	}
 
 	/* 
@@ -49,7 +24,6 @@ public class LoadMap : MonoBehaviour {
 	 * Also make sure that the image is placed in the Resources-folder
 	 * Height and width is the dimentions of the image.
 	 */
-
 	void LoadMaze(int length, int width, int offsetX, int offsetZ) {
 
 		const int R = 99;
@@ -67,12 +41,10 @@ public class LoadMap : MonoBehaviour {
 
 		for (int p1 = 0; p1 < length; p1++) { // loop over long edge
 			for (int p2 = 0; p2 < width; p2++) { // loop over short edge
+				bool isWall = ((int)Mathf.Round(mazeMap.GetPixel(p2, p1).b)) == 0;
+				if (isWall) {
 
-				Color pixel = mazeMap.GetPixel(p2, p1);
-
-				if (isWall (pixel)) {
-
-					x = p2 * wallElementWidth + offsetX;
+					x = p2*wallElementWidth + offsetX;
 
 					if (flatMaze) {
 						y = 0;
@@ -83,29 +55,13 @@ public class LoadMap : MonoBehaviour {
 						y = R * Mathf.Sin (thetaRadians);
 					}
 
-					position = new Vector3 (x, y, z);
-					wallElement = CreateWall (position, scale);
+					position = new Vector3(x, y, z);
+					wallElement = CreateWall(position, scale);
 
 					if (!flatMaze) {
-						RotateWall (wallElement);
-					}
-				} else if (isPlayer (pixel)) {
-					x = p2 * wallElementWidth + offsetX;
-					thetaRadians = Mathf.Deg2Rad * theta;
-					z = R * Mathf.Cos (thetaRadians);
-					y = R * Mathf.Sin (thetaRadians);
-					position = new Vector3 (x, y, z);
-					GameObject controller;
-					controller = GameObject.Find("MouseKeyboardPlayer");
-					if (controller) {
-						controller.transform.position = position;
-					}
-					controller = GameObject.Find("VRPlayerController");
-					if (controller) {
-						controller.transform.position = position;
+						RotateWall(wallElement);
 					}
 				}
-					
 			}
 			theta += angleStep;
 		}
