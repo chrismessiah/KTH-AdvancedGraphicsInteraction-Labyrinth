@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class ScoreCounter : MonoBehaviour {
 
+	GameController gameController {
+		get { return GameController.instance; }
+	}
+
 	Text text;
 	Vector3 startPoint;
 	int maxScore = 0;
@@ -15,11 +19,11 @@ public class ScoreCounter : MonoBehaviour {
 	}
 
 	void Start() {
-		startPoint = GameObject.Find("MouseKeyboardPlayer").transform.position;
+		startPoint = gameController.player.transform.position;
 	}
 
 	void Update () {
-		Vector3 currentPoint = GameObject.Find("MouseKeyboardPlayer").transform.position;
+		Vector3 currentPoint = gameController.player.transform.position;
 		Vector3 distance = currentPoint - startPoint;
 		int currentScore = (int)Mathf.Round(distance.magnitude);
 		if (maxScore < currentScore) {
