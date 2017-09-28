@@ -15,6 +15,6 @@ public class Timer : MonoBehaviour {
 
 	void Update () {
 		timeLeft -= Time.deltaTime;
-		text.text = "  TIME LEFT: " + Mathf.Round(timeLeft);
+		text.text = "  Time left: " + Mathf.Round(timeLeft);
 	}
 }

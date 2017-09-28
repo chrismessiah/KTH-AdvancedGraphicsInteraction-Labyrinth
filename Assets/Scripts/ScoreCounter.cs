@@ -11,7 +11,7 @@ public class ScoreCounter : MonoBehaviour {
 
 	void Awake () {
 		text = GetComponent<Text>();
-		text.text = "  SCORE: 0";
+		text.text = "  Score: 0";
 	}
 
 	void Start() {
@@ -24,7 +24,7 @@ public class ScoreCounter : MonoBehaviour {
 		int currentScore = (int)Mathf.Round(distance.magnitude);
 		if (maxScore < currentScore) {
 			maxScore = currentScore;
-			text.text = "  SCORE: " + maxScore;
+			text.text = "  Score: " + maxScore;
 		}
 	}
 }
