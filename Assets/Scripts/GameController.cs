@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour 
 {
     public static GameController instance;       //A reference to our game control script so we can access it statically.
+    public GameObject player;
+    private MazeGenerator mazeGenerator;
 
     void Awake()
     {

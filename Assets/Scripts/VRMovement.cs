@@ -72,8 +72,8 @@ public class VRMovement : MonoBehaviour
             touchpad = device.GetAxis(EVRButtonId.k_EButton_SteamVR_Touchpad);
 
             // MOVE
-            localForward = player.transform.InverseTransformDirection(moveTransform.forward);
-            localRight = player.transform.InverseTransformDirection(moveTransform.right);
+            localForward = player.transform.InverseTransformDirection(moveTransform.forward.normalized);
+            localRight = player.transform.InverseTransformDirection(moveTransform.right.normalized);
             worldForward = player.transform.TransformDirection(new Vector3(localForward.x, 0, localForward.z));
             worldRight = player.transform.TransformDirection(new Vector3(localRight.x, 0, localRight.z));
             movementVector = worldForward * moveSpeed * touchpad.y + worldRight * moveSpeed * touchpad.x;       
