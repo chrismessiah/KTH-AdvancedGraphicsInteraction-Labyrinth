@@ -3,75 +3,137 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LoadMap : MonoBehaviour {
+	public GameObject wallElementTemplate;
+	Texture2D mazeMap;
 
-	void Start () {;
-		LoadMaze("maze2", 300, 100, -8, 0);
+	void Awake () {;
+		string path = "maps/maze-chris";
+		//string path = "maps/generated_maze";
+
+		mazeMap = Resources.Load(path, typeof(Texture2D)) as Texture2D;
+
+		/* Input parameters
+		 * 	  1st - map length in pixels, must be less or equal to 360
+		 * 	  2nd - map width in pixels, must be less or equal to 100
+		 */
+		LoadMaze(220, 40, -50, 0);
 	}
 
-	void Update () {
-
+	// walls are black in the images
+	bool isWall(Color color) {
+		int blue = ((int)Mathf.Round(color.b));
+		int red = ((int)Mathf.Round(color.r));
+		int green = ((int)Mathf.Round(color.g));
+		if (blue == 0 && red == 0 && green == 0) {
+			return true;
+		}
+		return false;
 	}
 
-	// make sure the image settings under Advanced are
-	// 	Read/Write: 		Yes
-	// 	Non Power of 2: 	None
-	// Also make sure that the image is placed in the Resources-folder
-	// Height and width is the dimentions of the image.
-	void LoadMaze(string path, int length, int width, int offsetX, int offsetZ) {
+	// player is blue in the image
+	bool isPlayer(Color color) {
+		int blue = ((int)Mathf.Round(color.b));
+		int red = ((int)Mathf.Round(color.r));
+		int green = ((int)Mathf.Round(color.g));
+		if (blue == 1 && red == 0 && green == 0) {
+			return true;
+		}
+		return false;
+	}
+
+	/* 
+	 * Make sure the image settings under Advanced are
+	 * 	  Read/Write: 		Yes
+	 * 	  Non Power of 2: 	None
+	 * 
+	 * Also make sure that the image is placed in the Resources-folder
+	 * Height and width is the dimentions of the image.
+	 */
+
+	void LoadMaze(int length, int width, int offsetX, int offsetZ) {
+
+		const int R = 99;
+		float angleStep = 360f/length; // just to clarify that the input image is expected to be of length 360
+		float wallElementDepth = angleStep;
+		float wallElementWidth = 100f/width; // divide cylinder thickness with map pixel width;
 		
-		Texture2D texture = Resources.Load(path, typeof(Texture2D)) as Texture2D;
-
-		float theta = 0f;
-		int r = 11;
-		float x = 0f, y = 0f, z = 0f;
-
-		float angleStep = 360 / length; // assumes that the image file is less than 360 pixels in length
+		float x, y, z, theta = 0f, thetaRadians;
 
 		bool flatMaze = false;
 
-		for (int p1 = 0; p1 < width+1; p1++) {
-			for (int p2 = 0; p2 < length; p2++) {
-				bool isWall = ((int)Mathf.Round(texture.GetPixel(p1, p2).b)) == 0;
-				if (isWall) {
+		GameObject wallElement;
+		Vector3 position;
+		Vector3 scale = new Vector3 (wallElementDepth*2.5f, wallElementWidth, 2); // depth, width, height
+
+		for (int p1 = 0; p1 < length; p1++) { // loop over long edge
+			for (int p2 = 0; p2 < width; p2++) { // loop over short edge
+
+				Color pixel = mazeMap.GetPixel(p2, p1);
+
+				if (isWall (pixel)) {
+
+					x = p2 * wallElementWidth + offsetX;
+
 					if (flatMaze) {
-						x = p1 + offsetX;
 						y = 0;
 						z = p2;
-						Vector3 position = new Vector3(x, y, z);
-						CreateWall (position);
 					} else {
-						x = p1 + offsetX;
-						z = r * Mathf.Cos (theta);
-						y = r * Mathf.Sin (theta);
-						Vector3 position = new Vector3(x, y, z);
-						CreateWall(position, theta);	
+						thetaRadians = Mathf.Deg2Rad * theta;
+						z = R * Mathf.Cos (thetaRadians);
+						y = R * Mathf.Sin (thetaRadians);
+					}
+
+					position = new Vector3 (x, y, z);
+					wallElement = CreateWall (position, scale);
+
+					if (!flatMaze) {
+						RotateWall (wallElement);
+					}
+				} else if (isPlayer (pixel)) {
+					x = p2 * wallElementWidth + offsetX;
+					thetaRadians = Mathf.Deg2Rad * theta;
+					z = R * Mathf.Cos (thetaRadians);
+					y = R * Mathf.Sin (thetaRadians);
+					position = new Vector3 (x, y, z);
+					GameObject controller;
+					controller = GameObject.Find("MouseKeyboardPlayer");
+					if (controller) {
+						controller.transform.position = position;
+					}
+					controller = GameObject.Find("VRPlayerController");
+					if (controller) {
+						controller.transform.position = position;
 					}
 				}
-				theta += angleStep;
+					
 			}
-			theta = 0f;
+			theta += angleStep;
 		}
 
 	}
 
-	GameObject CreateWall(Vector3 position) {
-		GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-		cube.transform.position = position;
-		cube.transform.localScale = new Vector3(1, 6, 1);
-		return cube;
-	}
-		
-	GameObject CreateWall(Vector3 position, float angle) {
-		GameObject cube = CreateWall(position);
-		//cube.transform.RotateAround (Vector3.zero, Vector3.right, angle);
-		cube.transform.rotation = Quaternion.Euler(angle, 0, 0);
-		return cube;
+	void RotateWall(GameObject go) {
+		Vector3 origin = new Vector3 (0, 0, 0);
+
+		Vector3 normal = go.transform.position - origin;
+		Vector3 planeNormal = new Vector3 (1, 0, 0);
+
+		normal = Vector3.ProjectOnPlane (normal, planeNormal); // remove any x cord
+		go.transform.rotation = Quaternion.FromToRotation(go.transform.up, normal) * go.transform.rotation;
+		go.transform.Rotate(transform.rotation.x+90,transform.rotation.y,transform.rotation.z+90);
 	}
 
-	GameObject CreateWall(Vector3 position, float angle, Vector3 scale) {
+	GameObject CreateWall(Vector3 position) {
+		GameObject wall = Instantiate(wallElementTemplate) as GameObject;
+		//GetComponent<MeshRenderer>().material = new Material(shader);
+		wall.transform.position = position;
+		wall.transform.localScale = new Vector3(1, 1, 2);
+		return wall;
+	}
+
+	GameObject CreateWall(Vector3 position, Vector3 scale) {
 		GameObject cube = CreateWall(position);
 		cube.transform.localScale = scale;
-		cube.transform.rotation = Quaternion.Euler(0, 0, 0);
 		return cube;
 	}
 }

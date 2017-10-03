@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SpinVertical : MonoBehaviour {
 
+	public float speed;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -11,6 +13,6 @@ public class SpinVertical : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Rotate (Vector3.up * (100 * Time.deltaTime));
+		transform.Rotate (Vector3.up * (speed * Time.deltaTime));
 	}
 }
