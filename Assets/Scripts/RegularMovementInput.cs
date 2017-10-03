@@ -23,7 +23,7 @@ public class RegularMovementInput : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		float moveForward = Input.GetAxis("Vertical");
 		float strafe = Input.GetAxis("Horizontal");
 		Vector3 movement = new Vector3(strafe, 0, moveForward);

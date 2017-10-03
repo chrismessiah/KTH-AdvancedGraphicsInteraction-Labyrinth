@@ -2,6 +2,7 @@
 using System.Collections;
 using Valve.VR;
 
+
 public class VRMovement : MonoBehaviour
 {
     //public GameObject world;
@@ -27,6 +28,8 @@ public class VRMovement : MonoBehaviour
         get { return transform.parent.parent.GetComponent<MovementManager>(); }
     }
 
+    
+
     SteamVR_TrackedObject controller;
     Vector2 touchpad;
 
@@ -39,14 +42,14 @@ public class VRMovement : MonoBehaviour
 
     void Start()
     {
-        player = transform.parent.parent.gameObject;
-        rb = player.GetComponent<Rigidbody>();
+        player = moveManager.player;
+        rb = moveManager.rb;
         moveSpeed = moveManager.moveSpeed;
         controllerMove = moveManager.controllerMove;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // Doesn't need to update every frame, used for debugging and changing speed during running the game
         // Remove from final
@@ -74,13 +77,14 @@ public class VRMovement : MonoBehaviour
             // MOVE
 			localForward = player.transform.InverseTransformDirection(moveTransform.forward.normalized);
 			localRight = player.transform.InverseTransformDirection(moveTransform.right.normalized);
-            worldForward = player.transform.TransformDirection(new Vector3(localForward.x, 0, localForward.z));
-            worldRight = player.transform.TransformDirection(new Vector3(localRight.x, 0, localRight.z));
+            worldForward = player.transform.TransformDirection(new Vector3(localForward.x, 0, localForward.z).normalized);
+            worldRight = player.transform.TransformDirection(new Vector3(localRight.x, 0, localRight.z).normalized);
             movementVector = worldForward * moveSpeed * touchpad.y + worldRight * moveSpeed * touchpad.x;       
 
             rb.AddForce(movementVector, ForceMode.Acceleration);
             
 
         }
+
     }
 }

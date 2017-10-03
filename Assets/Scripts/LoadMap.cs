@@ -7,7 +7,7 @@ public class LoadMap : MonoBehaviour {
 	Texture2D mazeMap;
 
 	void Awake () {;
-		string path = "maps/maze-chris";
+		string path = "maps/maze-chris2";
 		//string path = "maps/generated_maze";
 
 		mazeMap = Resources.Load(path, typeof(Texture2D)) as Texture2D;
