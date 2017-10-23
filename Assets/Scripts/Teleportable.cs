@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerTeleport : MonoBehaviour {
+public class Teleportable : MonoBehaviour {
 
 
 	private bool teleporting = false;
@@ -24,6 +24,7 @@ public class PlayerTeleport : MonoBehaviour {
 		if(teleporting){
 			if(t >= 1){
 				teleporting = false;
+				t = 0;
 			} else {
 				float dist = (Time.time - startTime) * speed;
 				t = dist / length;

@@ -18,11 +18,12 @@ public class Teleport : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		if(other.gameObject.tag == "Player"){
+		if(other.GetComponent<Teleportable>() != null){
+			print("Should teleport");
 			if(LerpTeleport){
-				other.GetComponent<PlayerTeleport>().lerpTeleport(destination);
+				other.GetComponent<Teleportable>().lerpTeleport(destination);
 			} else {
-				other.GetComponent<PlayerTeleport>().instantTeleport(destination);
+				other.GetComponent<Teleportable>().instantTeleport(destination);
 			}
 			
 		}
