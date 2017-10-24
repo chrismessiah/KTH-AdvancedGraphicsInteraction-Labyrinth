@@ -52,7 +52,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
                 camera.localRotation = m_CameraTargetRot;
             }
 
-            UpdateCursorLock();
+            //UpdateCursorLock();
         }
 
         public void SetCursorLock(bool value)
@@ -68,8 +68,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         public void UpdateCursorLock()
         {
             //if the user set "lockCursor" we check & properly lock the cursos
-            if (lockCursor)
-                InternalLockUpdate();
+           // if (lockCursor)
+             //   InternalLockUpdate();
         }
 
         private void InternalLockUpdate()
