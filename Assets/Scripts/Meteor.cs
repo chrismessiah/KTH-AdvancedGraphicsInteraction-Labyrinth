@@ -5,7 +5,7 @@ using UnityEngine;
 public class Meteor : MonoBehaviour {
 	public float minSpeed = 10.0f;
 	public float turnSpeed = 250.0f;
-	public float randomFreq = 30.0f;
+	public float randomFreq = 50.0f;
 	public float randomForce = 80.0f;
 
 	public float alignForce = 20.0f;
@@ -14,7 +14,7 @@ public class Meteor : MonoBehaviour {
 	public float avoidanceRadius = 130.0f;
 	public float avoidanceForce = 60.0f;
 
-	public float gatherVelocity = 5.0f;
+	public float gatherVelocity = 5.0f;//cohesion
 	public float gatherRadius = 200.0f;
 
 	private Vector3 velocity;

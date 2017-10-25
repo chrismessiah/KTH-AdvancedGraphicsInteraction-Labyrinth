@@ -7,7 +7,7 @@ public class LoadMap : MonoBehaviour {
 	Texture2D mazeMap;
 
 	void Awake () {;
-		string path = "maps/maze-chris2";
+		string path = "maps/maze-999";
 		//string path = "maps/generated_maze";
 
 		mazeMap = Resources.Load(path, typeof(Texture2D)) as Texture2D;
@@ -16,7 +16,8 @@ public class LoadMap : MonoBehaviour {
 		 * 	  1st - map length in pixels, must be less or equal to 360
 		 * 	  2nd - map width in pixels, must be less or equal to 100
 		 */
-		LoadMaze(220, 40, -50, 0);
+		LoadMaze(220, 37, -50, 0); // maze-999 has dimensions  
+		//LoadMaze(220, 40, -50, 0);
 	}
 
 	// walls are black in the images
