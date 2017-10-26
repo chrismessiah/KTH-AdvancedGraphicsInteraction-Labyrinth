@@ -12,6 +12,10 @@ public class GameController : MonoBehaviour
     float endTime;
     public bool mapEnded = false;
     public Text endText;
+    public Text scoreText;
+    Ranking ranking {
+        get { return scoreText.GetComponent<Ranking>();}
+    }
 
 
     void Awake()
@@ -24,6 +28,8 @@ public class GameController : MonoBehaviour
         else if(instance != this)
             //...destroy this one because it is a duplicate.
             Destroy (gameObject);
+
+        ranking.readRank();        
     }
 
     void Update()
@@ -37,6 +43,7 @@ public class GameController : MonoBehaviour
     }
 
     public void onStartMap(){
+        
         startTime = Time.time;
     }
 
@@ -45,6 +52,10 @@ public class GameController : MonoBehaviour
             mapEnded = true;
             endTime = Time.time - startTime;
             endText.text = "Congratulations!\nYou made it in\n" + Mathf.Round(endTime) + " seconds";
+
+            ranking.saveRank(endTime);
+            ranking.showHighscore();
         }
     }
+    
 }

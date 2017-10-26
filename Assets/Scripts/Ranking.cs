@@ -11,43 +11,42 @@ using System.Linq;
 
 public class Ranking : MonoBehaviour {
 
-	Text text;
-	public GameObject rank;
-	public InputField username;
+	Text text {
+		get {return GetComponent<Text>();}
+	}
+	public List<float> records;
 
 
 	void Awake () {
-		text = GetComponent<Text>();
-		text.text = "Ending";
+
 	}
 		
 	// Use this for initialization
 	void Start () {
-//		rank.SetActive (false);
-//		rank = this;
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (TimeScore.instance.isEnded) {
-			rank.SetActive (false);
-			text.text = "Ending";
-		}
+
 	}
 
+	/*
 	public void showRanking(){
 		rank.SetActive (false);
 	}
 
-
+	
 	public string resultToJson(string name, int time)
 	{
 		Record record = new Record (name, time);
 		return JsonUtility.ToJson(record);
 	}
+	*/
 
-	void saveRank(string records)
+	public void saveRank(float record)
 	{
+		records.Add(record);
 		FileInfo f = new FileInfo(Application.dataPath + "/Resources/rank.txt");
 		StreamWriter writer= null;
 		if (f.Exists)
@@ -58,26 +57,35 @@ public class Ranking : MonoBehaviour {
 		{
 			writer = f.CreateText();
 		}
-		writer.WriteLine(records);
+		writer.WriteLine(record.ToString());
 		writer.Close();
 	}
 
-	void readRank(){
+	public void showHighscore(){
+		List<float> SortedList = records.OrderBy(r => r).ToList();
+		text.text = "Highscores\n\n";
+		for(int i=0; i<10; ++i){
+			print("record");
+			text.text += (Mathf.Round(SortedList[i]).ToString()+" seconds\n");
+		}
+	}
+
+	public void readRank(){
 		FileStream f = new FileStream(Application.dataPath + "/Resources/rank.txt", FileMode.Open);
-		Record temp = new Record ();
-		List<Record> records = new List<Record>();	
+		List<float> recordsTmp = new List<float>();	
 		if (f.CanRead){
 			StreamReader reader = new StreamReader(f);
 			string str;
 			while ((str = reader.ReadLine ()) != null) {
-				temp = JsonUtility.FromJson<Record> (str);
-				records.Add (temp);
+				recordsTmp.Add(float.Parse(str));
 			}
 		}
-		List<Record> SortedList = records.OrderBy(r=>r.time).ToList();
+		records = recordsTmp;
+		
 	}
 }
 
+/*
 class Record{
 	public string name;
 	public int time;
@@ -87,4 +95,4 @@ class Record{
 		name = n;
 		time = t;
 	}
-}
+}*/
