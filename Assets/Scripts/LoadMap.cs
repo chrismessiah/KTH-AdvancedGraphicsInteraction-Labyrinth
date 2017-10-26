@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class LoadMap : MonoBehaviour {
 	public GameObject wallElementTemplate;
-	Texture2D mazeMap;
+	public Texture2D mazeMap;
 
 	void Awake () {;
 		string path = "maps/maze-999";
 		//string path = "maps/generated_maze";
 
-		mazeMap = Resources.Load(path, typeof(Texture2D)) as Texture2D;
+		//mazeMap = Resources.Load(path, typeof(Texture2D)) as Texture2D;
 
 		/* Input parameters
 		 * 	  1st - map length in pixels, must be less or equal to 360
