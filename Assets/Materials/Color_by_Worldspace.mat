@@ -82,8 +82,8 @@ Material:
     m_Colors:
     - _AlbedoColor: {r: 0, g: 0, b: 0, a: 1}
     - _Color: {r: 1, g: 0, b: 0.7241378, a: 1}
-    - _Color1: {r: 0.11764707, g: 0, b: 1, a: 1}
-    - _Color2: {r: 0.11724138, g: 0, b: 1, a: 1}
+    - _Color1: {r: 0, g: 0.66896534, b: 1, a: 1}
+    - _Color2: {r: 0, g: 0.67058825, b: 1, a: 1}
     - _Color3: {r: 0.7793102, g: 0, b: 1, a: 1}
     - _Color4: {r: 0.7803922, g: 0, b: 1, a: 1}
     - _Emission: {r: 1, g: 0, b: 0.8068962, a: 1}
