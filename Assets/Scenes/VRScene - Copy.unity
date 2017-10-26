@@ -2343,6 +2343,18 @@ MonoBehaviour:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 732883469}
   m_Enabled: 1
+<<<<<<< HEAD
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5890e3cad70bea64d91aef9145ba3454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: -1
+  modelOverride: 
+  shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
+  verbose: 0
+  createComponents: 1
+  updateDynamically: 1
+=======
   serializedVersion: 2
   m_Convex: 0
   m_InflateMesh: 0
@@ -2390,6 +2402,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9d2f8bcca00ac43a0b16a8fe94a501ac, type: 2}
   m_IsPrefabParent: 0
+>>>>>>> 393dc0f64fe6ba8725d1a27b68808d0c690c8452
 --- !u!1 &784456460
 GameObject:
   m_ObjectHideFlags: 0
