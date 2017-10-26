@@ -1,13 +1,7 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Prefabs/Materials.meta
 guid: bea3e5b9de23441b1ad49bdb73f765e4
 folderAsset: yes
 timeCreated: 1509015102
-=======
-guid: 4c105109bb48b8b4d9510dd9156aa58f
-folderAsset: yes
-timeCreated: 1509018639
->>>>>>> origin/master:Assets/Prefabs/Materials.meta
 licenseType: Free
 DefaultImporter:
   userData: 

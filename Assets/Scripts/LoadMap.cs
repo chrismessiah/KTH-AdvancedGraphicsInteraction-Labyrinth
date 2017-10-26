@@ -64,7 +64,7 @@ public class LoadMap : MonoBehaviour {
 
 		GameObject wallElement;
 		Vector3 position;
-		Vector3 scale = new Vector3 (wallElementDepth*2.25f, wallElementWidth, 2); // depth, width, height
+		Vector3 scale = new Vector3 (wallElementDepth*2.5f, wallElementWidth, 2); // depth, width, height
 
 		for (int p1 = 0; p1 < length; p1++) { // loop over long edge
 			for (int p2 = 0; p2 < width; p2++) { // loop over short edge
