@@ -9,36 +9,48 @@ using System.Text;
 using System.IO;
 using System.Linq;
 
+
 public class Ranking : MonoBehaviour {
-
+	const int MaxNum = 10;
 	Text text;
-	public GameObject rank;
-	public InputField username;
-
+	public Ranking rank;
+	public InputField enterUsername;
+	int gametime;
+	string username;
+	bool isNameEntered =false;
 
 	void Awake () {
 		text = GetComponent<Text>();
-		text.text = "Ending";
+		text.text = "";
 	}
 		
 	// Use this for initialization
 	void Start () {
-//		rank.SetActive (false);
-//		rank = this;
+		rank = this;
+//		rank.gameObject.SetActive (false);
+		enterUsername.gameObject.SetActive(false);
+		enterUsername.onEndEdit.AddListener (delegate {getUsername(); });
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (TimeScore.instance.isEnded) {
-			rank.SetActive (false);
-			text.text = "Ending";
+//			rank.gameObject.SetActive (true);
+			text.text = "End of Game";
+			enterUsername.gameObject.SetActive(true);
+			if (isNameEntered) {
+				showRank ();
+			} else {
+				enterUsername.text = TimeScore.instance.timepassing.ToString();//"Plz enter your name here";
+			}
 		}
 	}
 
-	public void showRanking(){
-		rank.SetActive (false);
+	void getUsername(){
+		username = enterUsername.text.ToString ();
+		enterUsername.gameObject.SetActive(false);
+		isNameEntered =true;
 	}
-
 
 	public string resultToJson(string name, int time)
 	{
@@ -62,7 +74,7 @@ public class Ranking : MonoBehaviour {
 		writer.Close();
 	}
 
-	void readRank(){
+	List<Record> readRank(){
 		FileStream f = new FileStream(Application.dataPath + "/Resources/rank.txt", FileMode.Open);
 		Record temp = new Record ();
 		List<Record> records = new List<Record>();	
@@ -74,7 +86,32 @@ public class Ranking : MonoBehaviour {
 				records.Add (temp);
 			}
 		}
-		List<Record> SortedList = records.OrderBy(r=>r.time).ToList();
+		return records.OrderBy(r=>r.time).ToList();
+//		List<Record> SortedList = records.OrderBy(r=>r.time).ToList();
+	}
+
+	public void showRank(){
+		rank.gameObject.SetActive (true);
+		//get user name
+
+		//get game time
+		gametime =  (int)Mathf.Round (TimeScore.instance.timepassing);
+		//save to file
+		saveRank(resultToJson(username, gametime));
+
+
+		GameObject go = Instantiate(rank.gameObject);
+
+		//read rank list from file
+		List<Record> SortedList = readRank ();
+		int showNum = Math.Min (MaxNum,SortedList.Count);
+
+		//show
+		for (int i = 0; i < showNum; i++) {
+			go.transform.GetComponent<Text>().text += (i.ToString()+SortedList[i].toString()) ;
+		}
+
+
 	}
 }
 
@@ -86,5 +123,8 @@ class Record{
 	public Record(string n, int t){
 		name = n;
 		time = t;
+	}
+	public string toString(){
+		return String.Format ("\t{0, -10}\t{0, 5} sec\n", name, time);
 	}
 }
