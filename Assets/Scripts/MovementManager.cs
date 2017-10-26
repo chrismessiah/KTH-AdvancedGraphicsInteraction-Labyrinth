@@ -44,7 +44,7 @@ public class MovementManager : MonoBehaviour {
             }
         }
         VignetteModel.Settings vignettetmp = pp.vignette.settings;
-        vignettetmp.intensity = Mathf.Lerp(0.5f, 1f, t);
+        vignettetmp.intensity = Mathf.Lerp(0.3f, 0.75f, t);
         pp.vignette.settings = vignettetmp;
     }
 
