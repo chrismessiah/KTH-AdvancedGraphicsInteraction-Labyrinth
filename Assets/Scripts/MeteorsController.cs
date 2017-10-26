@@ -35,7 +35,7 @@ public class MeteorsController : MonoBehaviour {
 
 	private void CalculateNextMovementPoint()
 	{
-		float posX = Random.Range(-15, -15);
+		float posX = Random.Range(initialPosition.x - bound.x, initialPosition.x + bound.x);
 		float posY = Random.Range(initialPosition.y - bound.y, initialPosition.y + bound.y);
 		float posZ = Random.Range(initialPosition.z - bound.z, initialPosition.z + bound.z);
 
