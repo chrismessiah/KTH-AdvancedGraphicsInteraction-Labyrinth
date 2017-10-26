@@ -41,7 +41,10 @@ public class GameController : MonoBehaviour
     }
 
     public void onFinishMap(){
-        endTime = Time.time - startTime;
-        endText.text = "Congratulations! \n Your time was: " + Mathf.Round(endTime);
+        if(!mapEnded){
+            mapEnded = true;
+            endTime = Time.time - startTime;
+            endText.text = "Congratulations! \n Your time was: " + Mathf.Round(endTime);
+        }
     }
 }

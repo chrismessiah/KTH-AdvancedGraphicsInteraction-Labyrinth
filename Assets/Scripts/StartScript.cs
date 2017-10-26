@@ -8,7 +8,7 @@ public class StartScript : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other){
-		if(other.transform.gameObject.tag == "Player"){
+		if(other.gameObject.tag == "Player"){
 			print("startmap");
 			gameController.onStartMap();
 		}

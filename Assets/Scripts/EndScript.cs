@@ -7,8 +7,8 @@ public class EndScript : MonoBehaviour {
 		get {return GameController.instance;}
 	}
 
-	void onTriggerEnter(Collider other){
-		if(other.transform.gameObject.tag == "Player"){
+	void OnTriggerEnter(Collider other){
+		if(other.gameObject.tag == "Player"){
 			print("end");
 			gameController.onFinishMap();
 		}
