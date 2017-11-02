@@ -53,7 +53,7 @@ public class LoadMap : MonoBehaviour {
 
 	void LoadMaze(int length, int width, int offsetX, int offsetZ) {
 
-		const int R = 99;
+		const float R = 98.6f;
 		float angleStep = 360f/length; // just to clarify that the input image is expected to be of length 360
 		float wallElementDepth = angleStep;
 		float wallElementWidth = 100f/width; // divide cylinder thickness with map pixel width;
@@ -64,7 +64,7 @@ public class LoadMap : MonoBehaviour {
 
 		GameObject wallElement;
 		Vector3 position;
-		Vector3 scale = new Vector3 (wallElementDepth*2.5f, wallElementWidth, 2); // depth, width, height
+		Vector3 scale = new Vector3 (wallElementDepth*2.5f, wallElementWidth, 2.25f); // depth, width, height
 
 		for (int p1 = 0; p1 < length; p1++) { // loop over long edge
 			for (int p2 = 0; p2 < width; p2++) { // loop over short edge
